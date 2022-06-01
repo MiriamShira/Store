@@ -1,0 +1,256 @@
+
+class Product {
+    constructor(id,name, price,amount,category) {
+        this.name = name;
+        this.id = id;
+        this.price = price;
+        this.amount = amount;
+        this.category = category;
+    }
+    inc(a){
+        this.#incAmount(a);
+    }
+    dec(a){
+      this.#decAmount(a);
+    }
+    #incAmount(amount){
+        this.amount=this.amount+amount;
+    }
+    #decAmount(amount){
+      this.amount=this.amount-amount;
+    }
+   
+}
+
+ class Maneger{
+    constructor(name) {
+        this.name = name;
+        this.id = "1234";
+       
+    }
+   
+}
+ class Store {
+    constructor() {
+        this.products = [new Product(1, "first", 100, 4, "c"), new Product(1, "second", 100, 4, "b"),new Product(5, "testing", 45, 4, "a"),new Product(1, "last", 800, 2, "c")]
+        this.maneger = new Maneger("Chana");
+
+    }
+    getAllProducts() {
+
+        return this.products;
+    }
+    byProductName(name) {
+        let newProducts = this.products.filter(element => {
+            return element.name === name || element.name.includes(name);
+
+        });
+
+        return newProducts;
+
+    }
+
+    byRange(range1, range2) {
+        debugger;
+        let newProducts = this.products.filter(element => {
+          return  (element.price >parseInt(range1) && element.price
+          < parseInt(range2))
+
+        });
+        // clear();
+        // drow(newProducts);
+        return newProducts
+
+    }
+    byProductCategory(category) {
+        debugger;
+        //let category=document.getElementById("searchByPriceMin").Value;
+        let newProducts = this.products.filter(element => {
+           return  element.category === category
+
+        });
+        //clear();
+        //drow(newProducts);
+        return newProducts
+    }
+    outOfStock() {
+        let newProducts = this.products.filter(element => {
+            element.amount === 0;
+
+        });
+        return newProducts;
+
+    }
+    almustOutOfstack() {
+        debugger;
+        let newProducts = store.products.filter(element => {
+            return element.amount < 3;
+
+        });
+        return newProducts
+    }
+    saveNewProduct(id, name, price, amount, category) {
+        this.products.push(new Product(id, name, price, amount, category))
+      
+       return this.products;
+    }
+    saveChanges(p, id, name, price, amount, category) {
+
+
+
+        let position = store.products.indexOf(p);
+        this.products.splice(position, 1, new Product(id, name, price, amount, category));
+     
+       return this.products;
+
+
+
+    }
+  
+}
+
+
+const store = new Store();
+
+
+function getAllProducts() {
+
+    drow(store.getAllProducts());
+}
+function byProductName() {
+    let name = document.getElementById("search-name").value;
+    clear();
+    drow(store.byProductName(name));
+
+
+}
+function searchByPrice() {
+    let range1 = document.getElementById("searchByPriceMin").value;
+    let range2 = document.getElementById("searchByPriceMax").value;
+    clear()
+    drow(store.byRange(range1, range2));
+
+}
+
+
+function byProductCategory() {
+    let category = document.getElementById("searchByCategory").value;
+    debugger;
+    clear()
+    drow(store.byProductCategory(category));
+
+}
+
+function outOfStock() {
+    let arr = store.outOfStock();
+    if (arr.length > 0) {
+        clear();
+        drow(arr);
+    }
+    else {
+        alert("all in stock!")
+    }
+}
+function almustOutOfstack() {
+    let arr = store.almustOutOfstack();
+    if (arr.length > 0) {
+        clear();
+        drow(arr);
+    }
+    else {
+        alert("all in stock!")
+    }
+    
+}
+function saveNewProduct() {
+    let id = document.getElementById("code").value;
+    let name = document.getElementById("name").value;
+    let price = document.getElementById("price").value;
+    let amount = document.getElementById("amount").value;
+    let category = document.getElementById("category").value;
+    clear();
+    drow(store.saveNewProduct(id, name, price, amount, category));
+    document.getElementById("product").style.display = "none";
+}
+function addNewProdect() {
+
+    document.getElementById("product").style.display = "block";
+}
+
+
+function editProduct(p) {
+    console.log(p)
+    document.getElementById("productToEdit").style.display = "block";
+    // document.getElementById("nameEdit").innerText=p.name;
+    // document.getElementById("codeEdit").innerText=p.id;
+    // document.getElementById("categoryEdit").innerText=p.category;
+    // document.getElementById("priceEdit").innerText=p.price;  
+     document.getElementById("amountEdit").innerText=p.amount; 
+     document.getElementById("inc").addEventListener("click", (() =>{inc(p)} ));
+     document.getElementById("dec").addEventListener("click", (() =>{dec(p)} ));
+    document.getElementById("saveChanges").addEventListener("click", (() => saveChanges(p)))
+}
+function saveChanges(p) {
+
+    let name = document.getElementById("nameEdit").value;
+    let id = document.getElementById("codeEdit").value;
+    let category = document.getElementById("categoryEdit").value;
+    let price = document.getElementById("priceEdit").value;
+    let amount = document.getElementById("amountEdit").value;
+    clear()
+    drow(store.saveChanges(p, id, name, price, amount, category)) 
+
+    document.getElementById("productToEdit").style.display = "none";
+
+
+}
+
+function drow(data) {
+
+    data.forEach((d) => {
+
+
+        var tmp = document.getElementsByTagName("template")[0];
+        var element = tmp.content.cloneNode(true);
+
+        element.querySelector(".name").innerText = d.name
+        element.querySelector(".id").innerText = d.id
+        element.querySelector(".category").innerHTML = d.category
+        element.querySelector(".price").innerHTML = d.price
+        element.querySelector(".amount").innerHTML = d.amount;
+if(window.location.href.endsWith('/Store.html')){
+        element.querySelector(".delete").addEventListener("click", () => {   
+            let position = store.products.indexOf(d);
+            store.products.splice(position, 1);
+         clear();
+            drow(store.products);
+    console.log("delet") });
+        element.querySelector(".edit").addEventListener("click", () => { editProduct(d); console.log("edit") });
+}
+        var c = document.getElementById("tbody")
+        c.appendChild(element);
+    })
+}
+function clear() {
+    document.getElementById("tbody").innerHTML = "";
+}
+function isadmin(){
+    let admin=document.getElementById("password").value;
+    if (admin===store.maneger.id){
+        alert("hello admin!");
+        window.location.href="./Store.html"
+    }
+    else{
+        window.location.href="./userPage.html"
+    }
+}
+function inc(p){
+    store.products[store.products.indexOf(p)].inc(1);
+    console.log('amount in stack:', store.products[store.products.indexOf(p)].amount)
+
+}
+function dec(p){
+   
+    store.products[store.products.indexOf(p)].dec(1);
+    console.log('amount in stack:', store.products[store.products.indexOf(p)].amount)
+    }

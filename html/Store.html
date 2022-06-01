@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <link rel="stylesheet" href="../node_modules/mdb-ui-kit/css/mdb.rtl.min.css" />
+    <link rel="stylesheet" href="../node_modules/mdb-ui-kit/css/mdb.min.css.map" />
+    <link rel="stylesheet" href="../node_modules/mdb-ui-kit/css/mdb.min.css" />
+    <link rel="stylesheet" href="../node_modules/mdb-ui-kit/css/mdb.rtl.min.css.map" />
+    <!-- <script src="../js/store.js"></script>
+    <script src="../js/maneger.js"></script>
+    <script src="../js/product.js"></script> -->
+    <template id="allProducts">
+
+        <tr>
+            <td class="name"></td>
+            <td class="id"></td>
+            <td class="category"></td>
+            <td class="price"></td>
+            <td class="amount"></td>
+            <td>
+                <button class="delete">DELETE</button>
+            </td>
+            <td>
+                <button class="edit">EDIT</button>
+            </td>
+        </tr>
+
+
+
+
+    </template>
+    <title>Store</title>
+</head>
+
+<body onload="main.getAllProducts()" style="max-width: 70%; float: initial; margin-left: 15%;">
+
+    <div>
+        <h1>filtering options:</h1>
+        <form >
+            <span class="input-group-text border-0" id="search-addon">
+                <i class="fas fa-search">Search by name:</i>
+            </span>
+            <input type="search for names.." class="form-control rounded" placeholder="Search" aria-label="Search"
+                aria-describedby="search-addon" onchange="main.byProductName()" id="search-name" />
+        
+            <br />
+
+            
+        <br />
+       
+       
+            between 
+        <input type="number" id="searchByPriceMin" onchange="main.searchByPrice()" placeholder="minimun" min="0" value="0" />
+           to   
+        <input type="number" id="searchByPriceMax" onchange="main.searchByPrice()" placeholder="maximum" max="1000"  value="10" />
+          
+        <br />
+        <span>by category:</span>
+        <select id="searchByCategory" onchange="main.byProductCategory()">
+            <option>a</option>
+            <option>b</option>
+            <option>c</option>
+            <option>d</option>
+        </select>
+        <br />
+        <button onclick="main.outOfStock()">Out of stock products:</button>
+        <button onclick="main.almustOutOfstack()">almost Out of stock products:</button>
+        <br>
+    </form>
+        <h1 style="text-align:center">all store products:</h1>
+        <table class="table table-striped" >
+            <thead>
+                <tr>
+                    <th scope="col">name</th>
+                    <th scope="col">id</th>
+                    <th scope="col">category</th>
+                    <th scope="col">price</th>
+                    <th scope="col">amount</th>
+                    <th scope="col">delete </th>
+                    <th scope="col">edit</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+
+        <div id="productToEdit" style="display:none">
+            <span>product name: </span>
+            <input type="text" id="nameEdit" /><br /><br />
+            <span>product code: </span>
+            <input type="text" id="codeEdit" /><br /><br />
+            <span>product category: </span>
+            <select id="categoryEdit">
+                <option>a</option>
+                <option>b</option>
+                <option>c</option>
+                <option>d</option>
+            </select><br /><br />
+            <span>product price: </span>
+            <input type="number" id="priceEdit" /><br /><br />
+            <span>product units in Stock</span>
+            <input type="number" id="amountEdit" /><br /><br /> 
+            <button id="inc" >inc amount</button>
+            <button id="dec">dec amount</button>
+            <button id="saveChanges">save changes</button>
+        </div>
+
+
+        <button onclick="main.addNewProdect()">add new product</button><br /><br />
+        <div id="product" style="display: none">
+            <span>product name: </span>
+            <input type="text" id="name" /><br /><br />
+            <span>product code: </span>
+            <input type="text" id="code" /><br /><br />
+            <span>product category: </span>
+            <select id="category">
+                <option>a</option>
+                <option>b</option>
+                <option>c</option>
+                <option>d</option>
+            </select><br /><br />
+            <span>product price: </span>
+            <input type="number" id="price" /><br /><br />
+            <span>product units in Stock</span>
+            <input type="number" id="amount" /><br /><br />
+            <button onclick="main.saveNewProduct()">save</button>
+        </div>
+    </div>
+</body>
+<!-- <script src="../js/allinone.js"></script> -->
+<script src="../js/allinonescript.js"></script>
+</html>
