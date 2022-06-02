@@ -249,12 +249,16 @@ if(window.location.href.includes('/Store.html')){
  inc(p){
     this.store.products[this.store.products.indexOf(p)].inc(1);
     console.log('amount in stack:', this.store.products[this.store.products.indexOf(p)].amount)
+    this.clear()
+    this.drow(this.store.products)
 
 }
  dec(p){
    
     this.store.products[this.store.products.indexOf(p)].dec(1);
     console.log('amount in stack:',this.store.products[this.store.products.indexOf(p)].amount)
+    this.clear()
+    this.drow(this.store.products)
     }
 }
 window.main=new Main();

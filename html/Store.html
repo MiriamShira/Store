@@ -22,11 +22,12 @@
             <td class="price"></td>
             <td class="amount"></td>
             <td>
-                <button class="delete">DELETE</button>
+                <input type="button" class="delete" value="DELETE" >
+             
             </td>
             <td>
-                <button class="edit">EDIT</button>
-            </td>
+                <input type="button"  class="edit" value="EDIT" >
+           
         </tr>
 
 
@@ -67,8 +68,9 @@
             <option>d</option>
         </select>
         <br />
-        <button onclick="main.outOfStock()">Out of stock products:</button>
-        <button onclick="main.almustOutOfstack()">almost Out of stock products:</button>
+        <input type="button"   value="Out of stock products:" onclick="main.outOfStock()" >
+        <input type="button"   value="almost Out of stock products:" onclick="main.almustOutOfstack()" >
+     
         <br>
     </form>
         <h1 style="text-align:center">all store products:</h1>
@@ -104,13 +106,15 @@
             <input type="number" id="priceEdit" /><br /><br />
             <span>product units in Stock</span>
             <input type="number" id="amountEdit" /><br /><br /> 
-            <button id="inc" >inc amount</button>
-            <button id="dec">dec amount</button>
-            <button id="saveChanges">save changes</button>
+            <input type="button" id="inc"  value="inc amount"  >
+            <input type="button" id="dec"  value="dec amount"  >
+            <input type="button"  id="saveChanges"  value="save changes"  >
+         
         </div>
+        <input type="button"   value="add new product"  onclick="main.addNewProdect()">
 
-
-        <button onclick="main.addNewProdect()">add new product</button><br /><br />
+ 
+        <br /><br />
         <div id="product" style="display: none">
             <span>product name: </span>
             <input type="text" id="name" /><br /><br />
@@ -127,7 +131,8 @@
             <input type="number" id="price" /><br /><br />
             <span>product units in Stock</span>
             <input type="number" id="amount" /><br /><br />
-            <button onclick="main.saveNewProduct()">save</button>
+            <input type="button"   value="save"  onclick="main.saveNewProduct()">
+          
         </div>
     </div>
 </body>
